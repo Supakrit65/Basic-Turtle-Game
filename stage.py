@@ -4,6 +4,7 @@ from obstacle import Obstacle
 from item import Item
 from score import Score
 from border import Border
+import random
 
 
 class Stage(Turtle):
@@ -50,10 +51,10 @@ class Stage(Turtle):
             self.items.append(Item())
 
     def add_obs(self, n):
-        born_location = [[-200, -200], [-100, 100], [100, 100], [-150, 250],
-                         [100, -150], [150, 200], [0, -180], [80,-80]]
+        born_location = [[-200, -200], [-100, 100], [220, 100], [-150, 250],
+                         [100, -150], [150, 200], [0, -180]]
         for i in range(n):
-            self.obstacles.append(Obstacle(born_location[i]))
+            self.obstacles.append(Obstacle(random.choice(born_location)))
 
     @staticmethod
     def show_title():
@@ -85,3 +86,10 @@ class Stage(Turtle):
         end_style = ('Arial', 12)
         text.write('click the screen to exit', font=end_style)
         self.screen.exitonclick()
+
+    # def render(self):
+    #     self.__painter.clear()
+    #     self.__border.draw(self.__painter)
+    #     for ball in self.__balls:
+    #         ball.draw(self.__painter)
+    #     self.__painter.screen.update()

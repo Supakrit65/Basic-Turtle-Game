@@ -6,6 +6,7 @@ from player import Player
 from score import Score
 from border import Border
 from stage import Stage
+import time
 
 
 def view_score(username):
@@ -31,29 +32,25 @@ while True:
         player = Player(user_name, user_color)
         stage.create_screen(player)
         stage.add_item(10)
-        stage.add_obs(7)
+        stage.add_obs(10)
         score = Score()
         high_score = Score()
-        # score.show_tittle()
         score.update_score(player)
         high_score.show_high_score()
-        # obstacle_list = [Obstacle() for i in range(4)]
         while True:
             stage.update_screen()
             player.move()
             for item in stage.items:
                 item.move()
-
                 if player.is_collision_item(item):
                     item.jump()
                     score.change_score(100, player)
-
             for obs in stage.obstacles:
                 obs.move()
-
                 if player.is_collision_item(obs):
                     score.save_score(player)
-                    stage.end(Score())
+                    stage.end(score)
+
     elif choice == 'v':
         username = input('Please type your username you what to view score: ')
         view_score(username)

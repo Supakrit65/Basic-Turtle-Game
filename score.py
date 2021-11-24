@@ -12,11 +12,6 @@ class Score(Turtle):
         self.color('#900C3F')
         self.score = 0
 
-    # def show_tittle(self):
-    #     self.pendown()
-    #     self.write(f'Feast of the Turtle', False, align='center', font=("Comic Sans MS", 16, "normal"))
-    #     self.penup()
-
     def show_high_score(self):
         try:
             with open('game_data.json', 'r') as data_file:
