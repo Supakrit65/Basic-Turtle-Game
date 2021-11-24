@@ -11,6 +11,7 @@ class Score(Turtle):
         self.speed(0)
         self.color('#900C3F')
         self.score = 0
+        self.old_high_score = 0
 
     def show_high_score(self):
         try:
@@ -25,6 +26,19 @@ class Score(Turtle):
             high_score = max(scores)
             self.goto(270, 290)
             self.write(f'High score: {high_score}', False, align='right', font=("Comic Sans MS", 12, "normal"))
+
+    def get_high_score(self):
+        try:
+            with open('game_data.json', 'r') as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            return 0
+        else:
+            scores = []
+            for each_dict in data.values():
+                scores.append(each_dict['score'])
+            high_score = max(scores)
+            return int(high_score)
 
     def update_score(self, player):
         self.clear()

@@ -38,7 +38,6 @@ class Stage(Turtle):
         user_name = self.screen.textinput(title='Make your decision', prompt='Username of player: ')
         user_color = self.screen.textinput(title='Make your decision',
                                            prompt='Pick your player\'s color (blue, yellow, green) : ').lower()
-
         while user_color not in ['yellow', 'blue', 'green']:
             print('Please choose valid color choice.')
             user_color = self.screen.textinput(title='Make your decision', prompt='Pick your player\'s color (blue, '
@@ -95,8 +94,15 @@ class Stage(Turtle):
         text.color('#8CF310')
         text.goto(0, 0)
         style = ('Courier', 30, 'italic')
-        text.write(f'Game over: \n\nYour score is {score.score}', font=style, align='center')
+        if score.score > score.old_high_score:
+            text.goto(0, -50)
+            text.write(f'Game over:\nYou got a HIGH SCORE!\n\n'
+                       f'Your score is {score.score}', font=style, align='center')
+        else:
+            text.write(f'Game over:\n\n'
+                       f'Your score is {score.score}', font=style, align='center')
         text.goto(120, -270)
         end_style = ('Arial', 12)
         text.write('click the screen to exit', font=end_style)
+
         self.screen.exitonclick()
