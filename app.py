@@ -32,11 +32,15 @@ while True:
         player = Player(user_name, user_color)
         stage.create_screen(player)
         stage.add_item(10)
-        stage.add_obs(10)
+        stage.add_obs(4, player, False)
         score = Score()
         high_score = Score()
         score.update_score(player)
         high_score.show_high_score()
+        delay_obs = 200
+        delay_item = 300
+        delay_count_obs = 0
+        delay_count_item = 0
         while True:
             stage.update_screen()
             player.move()
@@ -45,12 +49,22 @@ while True:
                 if player.is_collision_item(item):
                     item.jump()
                     score.change_score(100, player)
+            if delay_count_obs == delay_obs:
+                stage.add_obs(1, player, True)
+                delay_count_obs = 0
+                delay_obs *= 2
+            if delay_count_item == delay_item:
+                stage.add_item(1)
+                delay_count_item = 0
             for obs in stage.obstacles:
                 obs.move()
                 if player.is_collision_item(obs):
                     score.save_score(player)
                     stage.end(score)
-
+            delay_count_obs += 1
+            delay_count_item += 1
+            # relay the screen update
+            time.sleep(0.0001)
     elif choice == 'v':
         username = input('Please type your username you what to view score: ')
         view_score(username)

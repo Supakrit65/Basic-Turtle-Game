@@ -13,15 +13,15 @@
     },
     "Goat": {
         "color": "green",
-        "score": 200
+        "score": 0
     },
     "greg": {
         "color": "blue",
         "score": 1400
     },
     "Goku": {
-        "color": "yellow",
-        "score": 400
+        "color": "blue",
+        "score": 1400
     },
     "Fak": {
         "color": "blue",
@@ -50,5 +50,85 @@
     "Son": {
         "color": "blue",
         "score": 0
+    },
+    "Tanny": {
+        "color": "blue",
+        "score": 700
+    },
+    "Uchita": {
+        "color": "yellow",
+        "score": 900
+    },
+    "Tano": {
+        "color": "green",
+        "score": 100
+    },
+    "Tanj": {
+        "color": "yellow",
+        "score": 600
+    },
+    "fd": {
+        "color": "blue",
+        "score": 0
+    },
+    "ffd": {
+        "color": "green",
+        "score": 0
+    },
+    "Tan": {
+        "color": "green",
+        "score": 700
+    },
+    "fee": {
+        "color": "green",
+        "score": 200
+    },
+    "fdfdf": {
+        "color": "yellow",
+        "score": 300
+    },
+    "green\\": {
+        "color": "green",
+        "score": 400
+    },
+    "green": {
+        "color": "yellow",
+        "score": 200
+    },
+    "Plaet": {
+        "color": "yellow",
+        "score": 200
+    },
+    "dgas": {
+        "color": "green",
+        "score": 300
+    },
+    "Td": {
+        "color": "yellow",
+        "score": 1100
+    },
+    "sfsfs": {
+        "color": "green",
+        "score": 1600
+    },
+    "Jo": {
+        "color": "yellow",
+        "score": 2500
+    },
+    "JPlat": {
+        "color": "green",
+        "score": 0
+    },
+    "fdfff": {
+        "color": "green",
+        "score": 500
+    },
+    "Game": {
+        "color": "yellow",
+        "score": 900
+    },
+    "Thas": {
+        "color": "blue",
+        "score": 300
     }
 }
