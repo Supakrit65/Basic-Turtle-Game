@@ -3,14 +3,18 @@ import random
 
 
 class Item(Turtle):
+    """
+    Maintain Item objects which move randomly.
+    Item class is a subclass of Turtle class.
+    Initialize with properties.
+    """
     def __init__(self):
         super().__init__()
         self.penup()
         self.speed(0)
         self.color('#AFE0EE')
-        self.shape('foodpic.gif')
-        # self.shape('circle')
-        self.speed = 1.5
+        self.shape('item.gif')
+        self.speed = 0.5
         self.goto(x=random.randint(-270, 270), y=random.randint(-270, 270))
         self.setheading(random.randint(0, 360))
         self.position = [self.xcor(), self.ycor()]

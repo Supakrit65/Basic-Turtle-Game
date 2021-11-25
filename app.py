@@ -1,7 +1,5 @@
 from turtle import Turtle, Screen
 import json
-from obstacle import Obstacle
-from item import Item
 from player import Player
 from score import Score
 from border import Border
@@ -12,7 +10,7 @@ import time
 def app_mode():
     interface = Screen()
     interface.register_shape('interface_wallpaper.gif')
-    # show my project name and my name
+    # show my project name and my name on the screen
     project_name = Turtle()
     interface.setup(width=400, height=400)
     interface.bgpic('interface_wallpaper.gif')
@@ -28,7 +26,7 @@ def app_mode():
     # Pop up a dialog window for input of app mode
     mode_choice = interface.textinput('App Mode', 'Type (p) to play a game or '
                                                   '(v) to view your score or (q) to quit: ').lower()
-    # if input is invalid ask of input again
+    # if input is invalid, ask for input again
     while mode_choice not in ['p', 'v', 'q']:
         # show a warning message on the screen for invalid input
         warning = Turtle()
@@ -36,36 +34,52 @@ def app_mode():
         warning.penup()
         warning.goto(-150, -80)
         warning.color('white')
-        warning.write('Warning:\nPlease give a valid input', font=("Arial", 10, "normal"))
+        warning.write('Warning:\nPlease give a valid mode input', font=("Arial", 10, "normal"))
         mode_choice = interface.textinput('App Mode', 'Type (p) to play a game or '
                                                       '(v) to view your score or (q) to quit: ').lower()
         warning.clear()
     if mode_choice == 'p':
+        # clear all the old messages
         project_name.clear()
-        game_mode()
-
+        instruction = Turtle()
+        instruction.hideturtle()
+        instruction.penup()
+        # call game_mode with instruction(a message on the screen) as argument
+        game_mode(instruction)
     elif mode_choice == 'v':
         view_mode(interface, project_name)
     else:
         print('App Closed')
 
 
-def game_mode():
+def game_mode(instruction):
+    style = ('Courier', 12, 'italic')
+    # write down game instruction
+    instruction.goto(0, 0)
+    instruction.color('white')
+    instruction.write(f'Please input your username & color', font=style, align='center')
+    instruction.goto(0, -150)
+    style = ('Courier', 10, 'italic')
+    instruction.color('#F7FE00')
+    instruction.write(f'Game instruction:\nEat the items and avoid others turtle', font=style, align='center')
+    # create a stage and border
     stage_corner = [-280, -280]
     stage_height = 280
     stage_width = 280
-    # create a stage and border
     border = Border(stage_corner, stage_height, stage_width)
     stage = Stage(border, Screen())
     # pop up dialog window for user input
     user_name, user_color = stage.ask_input()
+    instruction.clear()
+    # create player and items and obstacles on the screen
     player = Player(user_name, user_color)
     stage.create_screen(player)
-    stage.add_item(10)
+    stage.add_item(8)
     stage.add_obs(4, player, False)
+    # show your current score and the old high score
     score = Score()
     high_score = Score()
-    # show install score which is 0
+    # show your initial score which is 0
     score.update_score(player)
     high_score.show_high_score()
     delay_obs = 200   # delay loop for obstacle spawn
@@ -73,31 +87,48 @@ def game_mode():
     delay_count_obs = 0
     delay_count_item = 0
     time_sleep = 0.0001
+    hardest_level = Turtle()
     # start game loop
     while True:
+        # update the screen
         stage.update_screen()
         player.move()
         for item in stage.items:
             item.move()
+            # if player hit the item, item relocates randomly and your score increases
             if player.is_collision_item(item):
                 item.jump()
                 score.change_score(100, player)
+        # add more obstacle every some period of time
         if delay_count_obs == delay_obs:
-            stage.add_obs(1, player, True)
-            delay_count_obs = 0
-            delay_obs *= 2
+            # limit max obstacles on screen to 8
+            if len(stage.obstacles) < 8:
+                stage.add_obs(1, player, True)
+                delay_count_obs = 0
+                delay_obs *= 2
+                # increase hardest level if player manage to survive for a period of time
+                if len(stage.obstacles) > 6:
+                    stage.medium_mode(hardest_level)
+            else:
+                # when screen hold max amount of obstacles, start hard mode
+                hardest_level.clear()
+                stage.hard_mode(hardest_level)
+        # add more item on screen every some period of time
         if delay_count_item == delay_item:
-            stage.add_item(1)
-            delay_count_item = 0
+            # limit max items on screen to 12
+            if len(stage.items) < 12:
+                stage.add_item(1)
+                delay_count_item = 0
         for obs in stage.obstacles:
             obs.move()
-            if player.is_collision_item(obs):
+            # end game if player hits the obstacle
+            if player.is_collision_obs(obs):
                 score.old_high_score = score.get_high_score()
                 score.save_score(player)
                 stage.end(score)
         delay_count_obs += 1
         delay_count_item += 1
-        # relay the screen update
+        # delay the screen update
         time.sleep(time_sleep)
 
 
@@ -107,8 +138,10 @@ def view_mode(screen, user_data):
     instruction = Turtle()
     instruction.hideturtle()
     style = ('Courier', 15, 'italic')
+    # show instruction message on the screen
     instruction.write('Please type your username\nyou what to view score', font=style, align='center')
     screen.bgcolor('#D8FA04')
+    # pop up a dialog window for input for a username
     username = screen.textinput('View Mode', 'Please type your username you what to view score: ')
     instruction.clear()
     message = view_score(username)
@@ -116,6 +149,7 @@ def view_mode(screen, user_data):
     user_data.goto(0, -50)
     user_data.pendown()
     user_data.color('black')
+    # show the data of the given username
     user_data.write(f'Username: {username}\n{message}\n\n\nclick to exit the window',
                     font=("Calibri", 18, "bold"), align='center')
     screen.exitonclick()
@@ -128,6 +162,7 @@ def view_score(username):
     except FileNotFoundError:
         return f'No Data File Found'
     else:
+        # check if given username is found on the json file
         if username in data_dict:
             color = data_dict[username]['color']
             your_score = data_dict[username]['score']

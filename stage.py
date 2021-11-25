@@ -1,11 +1,7 @@
-from turtle import Turtle, Screen
-import json
+from turtle import Turtle
 from obstacle import Obstacle
 from item import Item
-from score import Score
-from border import Border
 import random
-from player import Player
 import math
 
 
@@ -25,7 +21,7 @@ class Stage(Turtle):
         self.screen.title('Simple Turtle GUI Game by Supakrit')
         self.screen.setup(width=660, height=660)
         self.screen.bgpic('sWallper.gif')
-        self.screen.register_shape('foodpic.gif')
+        self.screen.register_shape('item.gif')
         # update screen manually
         self.screen.tracer(0)
         # create border
@@ -79,6 +75,24 @@ class Stage(Turtle):
         title.goto(-85,293)
         title.write(f'Feast of the Turtle', False,
                     font=("Verdana", 15, 'bold'))
+
+    def medium_mode(self, mode_text):
+        mode_text.hideturtle()
+        for obs in self.obstacles:
+            obs.speed = 2
+        mode_text.penup()
+        mode_text.goto(180, -311)
+        mode_text.color('#700815')
+        mode_text.write(f'Medium Mode', font=("Verdana", 12, 'bold'), align='center')
+
+    def hard_mode(self, mode_text):
+        mode_text.hideturtle()
+        for obs in self.obstacles:
+            obs.speed = 3
+        mode_text.penup()
+        mode_text.goto(180, -311)
+        mode_text.color('#700815')
+        mode_text.write(f'Hard Mode', font=("Verdana", 12, 'bold'), align='center')
 
     def end(self, score):
         text = Turtle()

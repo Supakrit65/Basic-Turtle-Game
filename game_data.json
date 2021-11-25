@@ -7,16 +7,20 @@
         "color": "green",
         "score": 200
     },
-    "sfsfs": {
+    "Greg": {
+        "color": "yellow",
+        "score": 700
+    },
+    "gr": {
+        "color": "green",
+        "score": 900
+    },
+    "g": {
         "color": "green",
         "score": 400
     },
-    "Tan": {
-        "color": "yellow",
-        "score": 300
-    },
-    "gren": {
+    "re": {
         "color": "green",
-        "score": 600
+        "score": 1900
     }
 }
