@@ -27,7 +27,8 @@ class Score(Turtle):
             self.goto(270, 290)
             self.write(f'High score: {high_score}', False, align='right', font=("Comic Sans MS", 12, "normal"))
 
-    def get_high_score(self):
+    @staticmethod
+    def get_high_score():
         try:
             with open('game_data.json', 'r') as data_file:
                 data = json.load(data_file)
@@ -51,10 +52,11 @@ class Score(Turtle):
         self.score += points
         self.update_score(player)
 
-    def save_score(self, player):
+    @staticmethod
+    def save_score(player):
         new_data = {
             player.name: {
-                'color': player.color,
+                'color': player.colour,
                 'score': player.score
             }
         }

@@ -13,14 +13,26 @@
     },
     "gr": {
         "color": "green",
-        "score": 900
+        "score": 600
     },
     "g": {
-        "color": "green",
-        "score": 400
+        "color": "cyan",
+        "score": 700
     },
     "re": {
         "color": "green",
         "score": 1900
+    },
+    "gre": {
+        "color": "pink",
+        "score": 600
+    },
+    "Supakrit": {
+        "color": "violet",
+        "score": 100
+    },
+    "Tan": {
+        "color": "violet",
+        "score": 1200
     }
 }

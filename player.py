@@ -4,16 +4,16 @@ import math
 
 class Player(Turtle):
     """
-    Maintain player objects which movement can be controlled.
+    Maintain Player object which movement can be controlled.
     PLayer class is a subclass of Turtle class.
-    Initialize with name, speed, is_alive, and score properties.
+    Initialize with name, colour, speed, is_alive, and score properties.
     """
     def __init__(self, name, color):
         super().__init__()
         self.penup()
         self.shape('turtle')
         self.color(color)
-        self.color = color
+        self.colour = color
         self.speed = 2
         self.name = name
         self.position = [0, 0]
@@ -28,6 +28,15 @@ class Player(Turtle):
     @name.setter
     def name(self, name):
         self.__name = name
+
+    @property
+    def colour(self):
+        """Takes in Player instance, return private attribute colour"""
+        return self.__colour
+
+    @colour.setter
+    def colour(self, colour):
+        self.__colour = colour
 
     @property
     def speed(self, **kwargs):

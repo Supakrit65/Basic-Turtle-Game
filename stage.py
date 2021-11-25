@@ -33,8 +33,8 @@ class Stage(Turtle):
     def ask_input(self):
         user_name = self.screen.textinput(title='Make your decision', prompt='Username of player: ')
         user_color = self.screen.textinput(title='Make your decision',
-                                           prompt='Pick your player\'s color (blue, yellow, green) : ').lower()
-        while user_color not in ['yellow', 'blue', 'green']:
+                                           prompt='Pick your player\'s color (cyan, yellow, green, pink, violet) : ').lower()
+        while user_color not in ['yellow', 'cyan', 'green', 'pink', 'violet']:
             print('Please choose valid color choice.')
             user_color = self.screen.textinput(title='Make your decision', prompt='Pick your player\'s color (blue, '
                                                                                   'yellow, green) : ').lower()

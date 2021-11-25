@@ -3,25 +3,49 @@ import random
 
 
 class Obstacle(Turtle):
-
-    born_location = [[-200, -200],[-100, 100],[100, 100],[200, -200],[100, -100]]
-
+    """
+    Maintain Obstacle object which move randomly.
+    Obstacle class is a subclass of Turtle class.
+    Initialize with speed and position properties.
+    """
     def __init__(self, born_location):
         super().__init__()
         self.penup()
-        self.speed(0)
         self.color('white')
         self.shape('turtle')
         self.speed = 1
+        # random the spawn location of obstacle across the screen
         self.goto(born_location)
         self.setheading(random.randint(0, 360))
         self.position = [self.xcor(), self.ycor()]
 
+    @property
+    def speed(self, **kwargs):
+        """Takes in Obstacle instance, return private attribute speed"""
+        return self.__speed
+
+    @speed.setter
+    def speed(self, speed):
+        self.__speed = speed
+
+    @property
+    def position(self):
+        """Takes in Obstacle instance, return private attribute position"""
+        return self.__position
+
+    @position.setter
+    def position(self, position):
+        self.__position = position
+
     def move(self):
+        """move the Obstacle instance with its speed attribute"""
+        # Obstacle instance has a circular moving pattern
         self.forward(self.speed)
         self.left(0.5)
+        # turn left when obstacle hit the border
         if self.xcor() > 270 or self.xcor() < -270:
             self.left(60)
         if self.ycor() > 270 or self.ycor() < -270:
             self.left(60)
+        # update position property
         self.position = [self.xcor(), self.ycor()]

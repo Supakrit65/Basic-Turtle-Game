@@ -83,9 +83,10 @@ def game_mode(instruction):
     score.update_score(player)
     high_score.show_high_score()
     delay_obs = 200   # delay loop for obstacle spawn
-    delay_item = 300  # delay loop for obstacle spawn
+    delay_item = 300  # delay loop for item spawn
     delay_count_obs = 0
     delay_count_item = 0
+    step = 1
     time_sleep = 0.0001
     hardest_level = Turtle()
     # start game loop
@@ -100,15 +101,16 @@ def game_mode(instruction):
                 item.jump()
                 score.change_score(100, player)
         # add more obstacle every some period of time
-        if delay_count_obs == delay_obs:
+        if delay_count_obs >= delay_obs:
             # limit max obstacles on screen to 8
             if len(stage.obstacles) < 8:
                 stage.add_obs(1, player, True)
                 delay_count_obs = 0
-                delay_obs *= 2
+                delay_obs *= 1.5
                 # increase hardest level if player manage to survive for a period of time
                 if len(stage.obstacles) > 6:
                     stage.medium_mode(hardest_level)
+                    step = 2
             else:
                 # when screen hold max amount of obstacles, start hard mode
                 hardest_level.clear()
@@ -126,7 +128,7 @@ def game_mode(instruction):
                 score.old_high_score = score.get_high_score()
                 score.save_score(player)
                 stage.end(score)
-        delay_count_obs += 1
+        delay_count_obs += step
         delay_count_item += 1
         # delay the screen update
         time.sleep(time_sleep)
@@ -146,7 +148,7 @@ def view_mode(screen, user_data):
     instruction.clear()
     message = view_score(username)
     user_data.penup()
-    user_data.goto(0, -50)
+    user_data.goto(0, -70)
     user_data.pendown()
     user_data.color('black')
     # show the data of the given username
