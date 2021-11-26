@@ -1,9 +1,13 @@
 from turtle import Turtle
-from player import Player
 import json
 
 
 class Score(Turtle):
+    """
+    Maintain Score object which can track your score and save it.
+    Score class is a subclass of Turtle class.
+    Initialize with score property and old_high_score attribute.
+    """
     def __init__(self):
         super().__init__()
         self.penup()
@@ -13,7 +17,18 @@ class Score(Turtle):
         self.score = 0
         self.old_high_score = 0
 
+    @property
+    def score(self):
+        """Takes in Score instance, return private attribute score"""
+        return self.__score
+
+    @score.setter
+    def score(self, score):
+        """set a private attribute score to score"""
+        self.__score = score
+
     def show_high_score(self):
+        """get high score from json file and show it on the screen"""
         try:
             with open('game_data.json', 'r') as data_file:
                 data = json.load(data_file)
@@ -21,14 +36,17 @@ class Score(Turtle):
             self.write('High score: 0', False, align='right', font=("Comic Sans MS", 14, "normal"))
         else:
             scores = []
+            # extract score data from values of dictionaries and sort for the highest one
             for each_dict in data.values():
                 scores.append(each_dict['score'])
             high_score = max(scores)
+            # show previous high score on the top-right of the screen
             self.goto(270, 290)
             self.write(f'High score: {high_score}', False, align='right', font=("Comic Sans MS", 12, "normal"))
 
     @staticmethod
     def get_high_score():
+        """extract data from json file and return a int of high score """
         try:
             with open('game_data.json', 'r') as data_file:
                 data = json.load(data_file)
@@ -42,6 +60,7 @@ class Score(Turtle):
             return int(high_score)
 
     def update_score(self, player):
+        """update the current score of the player"""
         self.clear()
         self.goto(-280, 290)
         self.write(f'Score: {self.score}', False, align='left', font=("Comic Sans MS", 14, "normal"))
@@ -49,11 +68,14 @@ class Score(Turtle):
         player.score = self.score
 
     def change_score(self, points, player):
+        """update score property and call update_score function"""
         self.score += points
         self.update_score(player)
 
     @staticmethod
     def save_score(player):
+        """at the end of the game save username, color, and score on json file"""
+        # create new_data dict storing username as key and color and score as value
         new_data = {
             player.name: {
                 'color': player.colour,
@@ -70,4 +92,3 @@ class Score(Turtle):
             data.update(new_data)
             with open('game_data.json', 'w') as data_file:
                 json.dump(data, data_file, indent=4)
-

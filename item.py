@@ -25,6 +25,7 @@ class Item(Turtle):
 
     @speed.setter
     def speed(self, speed):
+        """set a private attribute speed with speed"""
         self.__speed = speed
 
     @property
@@ -34,6 +35,7 @@ class Item(Turtle):
 
     @position.setter
     def position(self, position):
+        """set a private attribute position with position"""
         self.__position = position
 
     def jump(self):

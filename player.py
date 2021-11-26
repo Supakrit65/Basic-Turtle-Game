@@ -27,6 +27,7 @@ class Player(Turtle):
 
     @name.setter
     def name(self, name):
+        """set a private attribute name with name"""
         self.__name = name
 
     @property
@@ -36,6 +37,7 @@ class Player(Turtle):
 
     @colour.setter
     def colour(self, colour):
+        """set a private attribute colour with colour"""
         self.__colour = colour
 
     @property
@@ -45,6 +47,7 @@ class Player(Turtle):
 
     @speed.setter
     def speed(self, speed):
+        """set a private attribute speed with speed"""
         self.__speed = speed
 
     @property
@@ -54,6 +57,7 @@ class Player(Turtle):
 
     @position.setter
     def position(self, position):
+        """set a private attribute position with position"""
         self.__position = position
 
     @property
@@ -63,6 +67,7 @@ class Player(Turtle):
 
     @is_alive.setter
     def is_alive(self, is_alive):
+        """set a private attribute is_alive with is_alive(Boolean)"""
         self.__is_alive = is_alive
 
     @property
@@ -72,6 +77,7 @@ class Player(Turtle):
 
     @score.setter
     def score(self, score):
+        """set a private attribute score with score"""
         self.__score = score
 
     def __repr__(self):
@@ -116,4 +122,3 @@ class Player(Turtle):
             return True
         else:
             return False
-

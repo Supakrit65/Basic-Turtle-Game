@@ -8,6 +8,7 @@ import time
 
 
 def app_mode():
+    """show the introduction screen and ask for type of mode to perform"""
     interface = Screen()
     interface.register_shape('interface_wallpaper.gif')
     # show my project name and my name on the screen
@@ -53,6 +54,7 @@ def app_mode():
 
 
 def game_mode(instruction):
+    """Ask for specific input to create and maintain the game and save progress"""
     style = ('Courier', 12, 'italic')
     # write down game instruction
     instruction.goto(0, 0)
@@ -135,6 +137,7 @@ def game_mode(instruction):
 
 
 def view_mode(screen, user_data):
+    """ask for a username which user want to view information and show them"""
     screen.clearscreen()
     screen.setup(400, 400)
     instruction = Turtle()
@@ -158,6 +161,7 @@ def view_mode(screen, user_data):
 
 
 def view_score(username):
+    """return the user data from the json file"""
     try:
         with open('game_data.json', 'r') as data_file:
             data_dict = json.load(data_file)

@@ -27,6 +27,7 @@ class Stage(Turtle):
 
     @border.setter
     def border(self, border):
+        """set a private attribute border with border"""
         self.__border = border
 
     @property
@@ -36,6 +37,7 @@ class Stage(Turtle):
 
     @screen.setter
     def screen(self, screen):
+        """set a private attribute screen with screen"""
         self.__screen = screen
 
     @property
@@ -45,6 +47,7 @@ class Stage(Turtle):
 
     @items.setter
     def items(self, items):
+        """set a private attribute items with items"""
         self.__items = items
 
     @property
@@ -54,6 +57,7 @@ class Stage(Turtle):
 
     @obstacles.setter
     def obstacles(self, obstacles):
+        """set a private attribute obstacles with obstacles"""
         self.__obstacles = obstacles
 
     def create_screen(self, player):

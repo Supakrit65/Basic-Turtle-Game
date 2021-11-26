@@ -25,6 +25,7 @@ class Border(Turtle):
 
     @corner.setter
     def corner(self, corner):
+        """set a private attribute corner with corner"""
         self.__corner = corner
 
     @property
@@ -34,6 +35,7 @@ class Border(Turtle):
 
     @width.setter
     def width(self, width):
+        """set a private attribute width with width"""
         self.__width = width
 
     @property
@@ -43,6 +45,7 @@ class Border(Turtle):
 
     @height.setter
     def height(self, height):
+        """set a private attribute height with height"""
         self.__height = height
 
     def draw_border(self):
