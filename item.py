@@ -8,7 +8,6 @@ class Item(Turtle):
     Item class is a subclass of Turtle class.
     Initialize with speed and position properties.
     """
-
     def __init__(self):
         super().__init__()
         self.penup()
@@ -55,4 +54,5 @@ class Item(Turtle):
         self.position = [self.xcor(), self.ycor()]
 
     def __str__(self):
+        """Take in Item instance, return a string"""
         return 'Item moving with 0.5 speed and having a random position'

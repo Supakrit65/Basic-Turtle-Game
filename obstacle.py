@@ -49,3 +49,7 @@ class Obstacle(Turtle):
             self.left(60)
         # update position property
         self.position = [self.xcor(), self.ycor()]
+
+    def __repr__(self):
+        """Take in Obstacle instance, return a string"""
+        return f'Obstacle(born_location={self.position})'
