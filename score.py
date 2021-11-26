@@ -28,21 +28,10 @@ class Score(Turtle):
         self.__score = score
 
     def show_high_score(self):
-        """get high score from json file and show it on the screen"""
-        try:
-            with open('game_data.json', 'r') as data_file:
-                data = json.load(data_file)
-        except FileNotFoundError:
-            self.write('High score: 0', False, align='right', font=("Comic Sans MS", 14, "normal"))
-        else:
-            scores = []
-            # extract score data from values of dictionaries and sort for the highest one
-            for each_dict in data.values():
-                scores.append(each_dict['score'])
-            high_score = max(scores)
-            # show previous high score on the top-right of the screen
-            self.goto(270, 290)
-            self.write(f'High score: {high_score}', False, align='right', font=("Comic Sans MS", 12, "normal"))
+        """get high score from get_high_score method and show it on the screen"""
+        high_score = self.get_high_score()
+        self.goto(270, 290)
+        self.write(f'High score: {high_score}', False, align='right', font=("Comic Sans MS", 12, "normal"))
 
     @staticmethod
     def get_high_score():

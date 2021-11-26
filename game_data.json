@@ -9,7 +9,7 @@
     },
     "gr": {
         "color": "pink",
-        "score": 400
+        "score": 1300
     },
     "gksk": {
         "color": "green",
@@ -18,5 +18,9 @@
     "your": {
         "color": "cyan",
         "score": 600
+    },
+    "gre": {
+        "color": "green",
+        "score": 200
     }
 }
